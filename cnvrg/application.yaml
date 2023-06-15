@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cnvrg
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: cnvrgv3
+    repoURL: https://charts.v3.cnvrg.io
+    targetRevision: 4.3.29
+    helm:
+      releaseName: cnvrg
+      valueFiles:
+        - values.yaml
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: cnvrg

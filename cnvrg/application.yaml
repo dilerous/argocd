@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    chart: cnvrgv3
+    chart: cnvrg
     repoURL: https://charts.v3.cnvrg.io
     targetRevision: 4.3.29
     helm:

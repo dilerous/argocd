@@ -12,7 +12,7 @@ spec:
     helm:
       releaseName: cnvrg
       valueFiles:
-        - cnvrg/cnvrg-values.yaml
+        - cnvrg-values.yaml
   destination:
     server: "https://kubernetes.default.svc"
     namespace: cnvrg

@@ -5,14 +5,16 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    chart: cnvrg
-    repoURL: https://github.com/dilerous/argocd
-    targetRevision: 4.3.29
-    helm:
-      releaseName: cnvrg
-      valueFiles:
-        - cnvrg-values.yaml
+  sources:
+    - chart: cnvrg
+      repoURL: https://github.com/dilerous/argocd
+      targetRevision: 4.3.29
+      helm:
+        releaseName: cnvrg
+        valueFiles:
+          - cnvrg-values.yaml
+    - repoURL: https://github.com/dilerous/argocd
+      path: cnvrg
   destination:
     server: "https://kubernetes.default.svc"
     namespace: cnvrg

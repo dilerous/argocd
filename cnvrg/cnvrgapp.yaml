@@ -1,0 +1,164 @@
+apiVersion: mlops.cnvrg.io/v1
+kind: CnvrgApp
+metadata:
+  name: cnvrg-app
+  namespace: cnvrg
+spec:
+  clusterDomain: "aws.dilerous.cloud"
+  clusterInternalDomain: "cluster.local"
+  imageHub: docker.io/cnvrg
+  cri: ""
+  labels: { }
+  annotations: { }
+  controlPlane:
+    image: cnvrg/app:v4.7.98
+    baseConfig:
+      agentCustomTag: latest
+      intercom: "true"
+      featureFlags:
+        CNVRG_ENABLE_MOUNT_FOLDERS: "true"
+        CNVRG_MOUNT_HOST_FOLDERS: "false"
+      cnvrgPrivilegedJob: true
+    hyper:
+      enabled: true
+    cnvrgScheduler:
+      enabled: true
+    cnvrgClusterProvisionerOperator:
+      enabled: false
+    cnvrgRouter:
+      enabled: false
+      image: nginx:1.21.0
+    objectStorage:
+      accessKey: ""
+      bucket: "cnvrg-storage"
+      region: "eastus"
+      secretKey: ""
+      type: minio
+      endpoint: ""
+      azureAccountName: ""
+      azureContainer: ""
+      gcpSecretRef: "gcp-storage-secret"
+      gcpProject: ""
+    searchkiq:
+      enabled: true
+      hpa:
+        enabled: true
+        maxReplicas: 5
+    sidekiq:
+      enabled: true
+      split: true
+      hpa:
+        enabled: true
+        maxReplicas: 5
+    smtp:
+      server: ""
+      port: 587
+      username: ""
+      password: ""
+      domain: ""
+      opensslVerifyMode: ""
+      sender: "info@cnvrg.io"
+    systemkiq:
+      enabled: true
+      hpa:
+        enabled: true
+        maxReplicas: 5
+    webapp:
+      enabled: true
+      svcName: app
+      replicas: 1
+      hpa:
+        enabled: true
+        maxReplicas: 5
+
+    mpi:
+      enabled: true
+      image: mpioperator/mpi-operator:v0.2.3
+      kubectlDeliveryImage: mpioperator/kubectl-delivery:v0.2.3
+      registry:
+        url: "docker.io"
+        user: ""
+        password: ""
+      extraArgs: { }
+    ldap:
+      enabled: false
+      host: ""
+      port: ""
+      account: "userPrincipalName"
+      base: ""
+      adminUser: ""
+      adminPassword: ""
+      ssl: "false"
+  registry:
+    url: "docker.io"
+    user: ""
+    password: ""
+  dbs:
+    cvat:
+      enabled: false
+      pg:
+        enabled: false
+      redis:
+        enabled: false
+    es:
+      enabled: true
+      replicas: 1
+      storageSize: 10Gi
+      storageClass: ""
+      patchEsNodes: true
+      cleanupPolicy:
+          all: 3d
+          app: 30d
+          jobs: 14d
+          endpoints: 1825d
+    minio:
+      enabled: true
+      storageSize: 20Gi
+      storageClass: ""
+    pg:
+      enabled: true
+      storageSize: 20Gi
+      storageClass: ""
+      hugePages:
+        enabled: false
+        size: 2Mi
+        memory: ""
+      backup:
+        enabled: true
+        rotation: 5
+        period: 24h
+  logging:
+    elastalert:
+      enabled: false
+      storageSize: 30Gi
+      storageClass: ""
+    kibana:
+      enabled: true
+      svcName: kibana
+  networking:
+    https:
+      enabled: false
+      certSecret: ""
+    proxy:
+      enabled: false
+    ingress:
+      type: ingress
+    eastWest:
+      enabled: false
+      primary: false
+      clusterName:
+      network: network1
+      meshId: mesh1
+  sso:
+    enabled: false
+    adminUser: ""
+    provider: ""
+    clientId: ""
+    clientSecret: ""
+    azureTenant: ""
+    oidcIssuerUrl: ""
+    cookieSecret: "uI6EhFe059hkWw0c"
+  tenancy:
+    enabled: false
+    key: purpose
+    value: cnvrg-control-plane

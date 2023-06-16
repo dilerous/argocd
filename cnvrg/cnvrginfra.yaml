@@ -1,0 +1,101 @@
+apiVersion: mlops.cnvrg.io/v1
+kind: CnvrgInfra
+metadata:
+  name: cnvrg-infra
+spec:
+  clusterDomain: "aws.dilerous.cloud"
+  clusterInternalDomain: "cluster.local"
+  infraNamespace: cnvrg
+  imageHub: docker.io/cnvrg
+  cri: ""
+  configReloader:
+    enabled: true
+  gpu:
+    nvidiaDp:
+      enabled: true
+    habanaDp:
+      enabled: true
+  capsule:
+    enabled: false
+    image: cnvrg-capsule:1.0.2
+  labels: { }
+  annotations: { }
+  registry:
+    url: "docker.io"
+    user: ""
+    password: ""
+  storage:
+    hostpath:
+      enabled: false
+      image: ""
+      path: "/cnvrg-hostpath-storage"
+      reclaimPolicy: "Retain"
+      defaultSc: false
+    nfs:
+      enabled: false
+      image: ""
+      server: ""
+      path: ""
+      reclaimPolicy: "Retain"
+      defaultSc: false
+  dbs:
+    redis:
+      enabled: true
+      storageSize: 10Gi
+      storageClass: ""
+  sso:
+    enabled: false
+    adminUser: ""
+    provider: ""
+    clientId: ""
+    clientSecret: ""
+    azureTenant: ""
+    oidcIssuerUrl: ""
+    cookieSecret: "nA6GYI2FuxlDRib4"
+  logging:
+    fluentbit:
+      enabled: true
+  monitoring:
+    defaultServiceMonitors:
+      enabled: true
+    cnvrgIdleMetricsExporter:
+      enabled: true
+      labels:
+        cnvrg-infra-prometheus: cnvrg-infra-cnvrg
+    dcgmExporter:
+      enabled: true
+    habanaExporter:
+      enabled: true
+    grafana:
+      enabled: true
+      svcName: grafana
+    kubeStateMetrics:
+      enabled: true
+    nodeExporter:
+      enabled: true
+    prometheus:
+      enabled: true
+      storageClass: ""
+      retention: 8w
+      storageSize: 50Gi
+      credsRef: prom-creds
+    prometheusOperator:
+      enabled: true
+  networking:
+    https:
+      enabled: false
+      certSecret: ""
+    ingress:
+      type: "ingress"
+    proxy:
+      enabled: false
+    eastWest:
+      enabled: false
+      primary: false
+      clusterName:
+      network: network1
+      meshId: mesh1
+  tenancy:
+    enabled: false
+    key: purpose
+    value: cnvrg-control-plane

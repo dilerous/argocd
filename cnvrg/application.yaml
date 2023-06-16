@@ -7,10 +7,12 @@ spec:
   project: default
   source:
     chart: cnvrg
-    repoURL: https://charts.v3.cnvrg.io
+    repoURL: 'https://github.com/dilerous/argocd'
     targetRevision: 4.3.29
     helm:
       releaseName: cnvrg
+      valueFiles:
+        - cnvrg-values.yaml
   destination:
     server: "https://kubernetes.default.svc"
     namespace: cnvrg

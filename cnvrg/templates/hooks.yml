@@ -85,7 +85,6 @@ spec:
                 sleep 0.1
               done
               echo "installation completed. . . ";
-              kubectl delete job post-install -n {{ template "spec.cnvrgNs" . }}
               {{- end }}
       restartPolicy: Never
 

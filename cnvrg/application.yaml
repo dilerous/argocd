@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     chart: cnvrg
-    repoURL: 'https://github.com/dilerous/argocd'
+    repoURL: https://github.com/dilerous/argocd
     targetRevision: 4.3.29
     helm:
       releaseName: cnvrg

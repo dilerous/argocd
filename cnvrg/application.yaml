@@ -16,3 +16,6 @@ spec:
   destination:
     server: "https://kubernetes.default.svc"
     namespace: cnvrg
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

@@ -7,19 +7,18 @@ spec:
   project: default
   sources:
     - chart: cnvrg
-      repoURL: https://github.com/dilerous/argocd
-      targetRevision: 4.3.29
+      repoURL: https://charts.v3.cnvrg.io
+      targetRevision: 4.3.30
       helm:
         releaseName: cnvrg
         valueFiles:
-          - cnvrg-values.yaml
-    - repoURL: https://github.com/dilerous/argocd
-      path: cnvrg
+          - $values/cnvrg/values.yaml
+    - repoURL: https://github.com/dilerous/argocd.git
+      ref: values
+      targetRevision: main
   destination:
     server: "https://kubernetes.default.svc"
     namespace: cnvrg
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-  syncStrategy:
-    apply: true

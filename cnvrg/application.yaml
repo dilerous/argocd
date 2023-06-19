@@ -12,7 +12,7 @@ spec:
       helm:
         releaseName: cnvrg
         valueFiles:
-          - $values/values.yaml
+          - $values/cnvrg/values.yaml
     - repoURL: https://github.com/dilerous/argocd.git
       ref: values
       targetRevision: main

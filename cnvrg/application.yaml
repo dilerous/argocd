@@ -12,9 +12,8 @@ spec:
       helm:
         releaseName: cnvrg
         valueFiles:
-          - $values/cnvrg/values.yaml
+          - https://raw.githubusercontent.com/dilerous/argocd/main/cnvrg/values.yaml
     - repoURL: https://github.com/dilerous/argocd.git
-      ref: values
       targetRevision: main
   destination:
     server: "https://kubernetes.default.svc"

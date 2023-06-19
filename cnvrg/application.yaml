@@ -15,6 +15,7 @@ spec:
           - https://raw.githubusercontent.com/dilerous/argocd/main/cnvrg/values.yaml
     - repoURL: https://github.com/dilerous/argocd.git
       targetRevision: main
+      path: cnvrg
   destination:
     server: "https://kubernetes.default.svc"
     namespace: cnvrg

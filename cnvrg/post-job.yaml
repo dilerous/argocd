@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: post-install
+  namespace: cnvrg
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  template:
+    spec:
+      serviceAccountName: cnvrg-bootstrap
+      terminationGracePeriodSeconds: 1
+      containers:
+        - name: cnvrgapp
+          image: "docker.io/cnvrg/cnvrg-tools:v0.3"
+          args:
+            - /bin/bash
+            - -c
+            - |
+              echo "running post install"
+              _term() {
+                echo "Caught SIGTERM signal!"
+                exit
+              }
+              trap _term SIGTERM
+              echo "waiting for cnvrgapp will finish installation. . . ";
+              while [[ $(kubectl get cnvrgapp cnvrg-app -n cnvrg -o=jsonpath='{.status.status}') != READY ]]; do
+                sleep 0.1
+              done
+              echo "installation completed. . . ";
+      restartPolicy: Never

@@ -4,7 +4,7 @@ controlPlane:
     featureFlags:
       CNVRG_ENABLE_MOUNT_FOLDERS: true
       CNVRG_MOUNT_HOST_FOLDERS: false
-  image: cnvrg/app:v4.7.95
+  image: cnvrg/app:v4.7.98
 dbs:
   es:
     storageSize: 10Gi

@@ -1,0 +1,29 @@
+clusterDomain: aws.dilerous.cloud
+controlPlane:
+  baseConfig:
+    featureFlags:
+      CNVRG_ENABLE_MOUNT_FOLDERS: true
+      CNVRG_MOUNT_HOST_FOLDERS: false
+  image: cnvrg/app:v4.7.95
+dbs:
+  es:
+    storageSize: 10Gi
+  minio:
+    storageSize: 20Gi
+  pg:
+    storageSize: 20Gi
+logging:
+  elastalert:
+    enabled: false
+networking:
+  ingress:
+    type: ingress
+  istio:
+    enabled: false
+    externalIp:
+    - 172.31.21.239
+registry:
+  password: ''
+  user: ''
+capsule:
+  enabled: false

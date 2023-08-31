@@ -1,4 +1,4 @@
-clusterDomain: aws.dilerous.cloud
+clusterDomain: worker.dilerous.cloud
 controlPlane:
   baseConfig:
     featureFlags:
@@ -12,9 +12,9 @@ dbs:
     storageSize: 20Gi
   pg:
     storageSize: 20Gi
-logging:
-  elastalert:
-    enabled: false
+monitoring:
+  prometheus:
+    storageSize: 10Gi
 networking:
   ingress:
     type: ingress

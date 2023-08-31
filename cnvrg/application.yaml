@@ -8,7 +8,7 @@ spec:
   source:
     chart: cnvrg
     repoURL: https://charts.v3.cnvrg.io
-    targetRevision: 4.3.30
+    targetRevision: 4.3.32
     helm:
       releaseName: cnvrg
       valueFiles:

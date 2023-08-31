@@ -31,4 +31,4 @@ sso:
   enabled: true
   provider: "oidc"
   emailDomain:
-    - "*"
+    - cnvrg.io

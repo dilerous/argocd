@@ -30,4 +30,4 @@ capsule:
 sso:
   enabled: true
   provider: "oidc"
-  emailDomain: [*]
+  emailDomain: [cnvrg.io]
